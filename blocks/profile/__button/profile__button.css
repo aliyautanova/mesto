@@ -1,0 +1,33 @@
+.profile__button{
+  height: 50px;
+  width: 150px;
+  border: 1px solid white;
+  background-color: black;
+  color: white;
+  font-size: 42px;
+  align-self: center;
+  text-align: center;
+  padding: 0;
+  margin-left: auto;
+  outline: none;
+}
+
+.profile__button:hover{
+  opacity: .5;
+  cursor: pointer;
+}
+
+
+@media screen and (max-width: 882px){
+  .profile__button{
+    margin: 40px auto;
+    width: 282px;
+  }
+}
+
+@media screen and (max-width: 320px){
+  .profile__button{
+    width: 100%;
+    margin: auto;
+  }
+}

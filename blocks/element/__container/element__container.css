@@ -1,0 +1,7 @@
+.element__container{
+  display: flex;
+  max-width: 87%;
+  margin: auto;
+  flex-direction: row;
+  justify-content: space-between;
+}

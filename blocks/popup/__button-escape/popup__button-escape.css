@@ -1,0 +1,12 @@
+.popup__button-escape{
+  position: absolute;
+  top: -42px;
+  right: -46px;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.popup__button-escape:hover{
+  opacity: .5;
+}

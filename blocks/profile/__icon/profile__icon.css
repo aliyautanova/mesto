@@ -1,0 +1,14 @@
+.profile__icon{
+  border: 1px solid white;
+  padding: 5px;
+  height: 12px;
+  width: 12px;
+}
+
+@media screen and (max-width: 320px){
+  .profile__icon{
+    padding: 5px;
+    height: 6px;
+    width: 6px;
+  }
+}

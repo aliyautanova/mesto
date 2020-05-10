@@ -1,0 +1,9 @@
+.element__link{
+  text-decoration: none;
+  color: black;
+}
+
+.element__link:hover{
+  opacity: 0.5;
+  cursor: pointer;
+}

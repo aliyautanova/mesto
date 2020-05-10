@@ -1,0 +1,14 @@
+.profile__button-rename{
+  background: none;
+  border: none;
+  height: 26px;
+  margin: 0 0 0 12px;
+  padding: 0;
+  align-self: flex-end;
+  outline: none;
+}
+
+.profile__button-rename:hover{
+  opacity: .5;
+  cursor: pointer;
+}
