@@ -1,4 +1,6 @@
+@import url(../fonts/inter.css);
 @import url(./normalize.css);
+@import url(../blocks/body/body.css);
 @import url(../blocks/page/page.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/line/line.css);
@@ -7,6 +9,5 @@
 @import url(../blocks/element/element.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/popup/popup.css);
-@import url(../blocks/icon/icon.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/section-size/section-size.css)

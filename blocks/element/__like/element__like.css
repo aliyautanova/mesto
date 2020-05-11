@@ -1,4 +1,11 @@
 .element__like{
-  height: 18.13px;
+  width: 21px;
+  height: 19px;
   align-self: center;
+  background: url(../../../images/like.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  border: none;
+  outline: none;
+  padding: 0;
 }

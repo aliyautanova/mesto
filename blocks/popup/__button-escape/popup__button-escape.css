@@ -8,5 +8,13 @@
 }
 
 .popup__button-escape:hover{
-  opacity: .5;
+  opacity: .6;
+  transition: opacity 1s linear;
+}
+
+@media screen and (max-width: 452px){
+  .popup__button-escape{
+    top: -50px;
+    right: -19px;
+  }
 }

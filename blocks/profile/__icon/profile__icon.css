@@ -4,7 +4,10 @@
   height: 12px;
   width: 12px;
 }
-
+.profile__icon:hover{
+  opacity: .6;
+  transition: opacity 1s linear;
+}
 @media screen and (max-width: 320px){
   .profile__icon{
     padding: 5px;
