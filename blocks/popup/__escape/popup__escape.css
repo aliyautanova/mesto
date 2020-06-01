@@ -1,0 +1,10 @@
+.popup__escape{
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.popup__escape:hover{
+  opacity: .6;
+  transition: opacity 1s linear;
+}

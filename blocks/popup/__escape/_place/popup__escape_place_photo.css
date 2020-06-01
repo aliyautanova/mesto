@@ -1,0 +1,14 @@
+.popup__escape_place_photo{
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  padding: 0;
+
+}
+
+@media screen and (max-width: 452px){
+  .popup__escape_place_photo{
+    top: -34px;
+    right: -34px;
+  }
+}

@@ -1,0 +1,12 @@
+.popup__escape_place_form{
+  position: absolute;
+  top: -42px;
+  right: -46px;
+}
+
+@media screen and (max-width: 452px){
+  .popup__escape_place_form{
+    top: -50px;
+    right: -19px;
+  }
+}

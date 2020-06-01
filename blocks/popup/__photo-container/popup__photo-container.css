@@ -1,0 +1,13 @@
+.popup__photo-container{
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -25%);
+  margin: 0;
+}
+
+@media screen and (max-width:784px){
+  .popup__photo-container{
+    max-width: 90%;
+  }
+}
