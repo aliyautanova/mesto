@@ -2,12 +2,14 @@ const popupEdit = document.querySelector('.popup__edit');
 const editButton = document.querySelector('.profile__button-rename');
 const escapeButton = document.querySelector('.popup__escape');
 const escapeButtonPlaceAdd = document.querySelector('.popup__escape_active');
-const escapeButtonPlacePhoto = document.querySelector('.popup__escape_place_photo');
 const popupAdd = document.querySelector('.popup__add');
 const addButton = document.querySelector('.profile__button');
 const formElementAdd = document.querySelector('.popup__container_place-add');
 const elements = document.querySelector('.elements');//контейнер для карточки
-
+const buttonClosePopupPhoto = document.querySelector('.popup__escape_place_photo');
+const popupPhoto = document.querySelector('.popup__photo');
+const popupPhotoZoom = popupPhoto.querySelector('.popup__photo-zoom');
+const popupTitleZoom = popupPhoto.querySelector('.popup__caption');
 //поля ввода
 const nameInput = document.querySelector('.popup__input_name');
 const jobInput = document.querySelector('.popup__input_job');
@@ -42,9 +44,6 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
-initialCards.forEach(element => {
-  addCard(element.link, element.name);
-});
 
 //открыть-закрыть окно редактирования popup__edit
 function togglePopup(element) {
@@ -80,34 +79,32 @@ function addCard(link, name) {
 
   /* удалить карточку */
   const deleteButton = cardContent.querySelector('.element__delete');
-  function del(evt) {
+  deleteButton.addEventListener('click', (evt) => {
     evt.target.closest('.element').remove();
-  }
-  deleteButton.addEventListener('click', del);
+  });
 
   /* лайкнуть карточку */
   const likeButton = cardContent.querySelector('.element__like');
-  likeButton.addEventListener('click', function (evt) {
-    evt.target.classList.toggle('element__like_active')
+  likeButton.addEventListener('click', (evt) => {
+    evt.target.classList.toggle('element__like_active');
   });
 
   /* увеличить карточку (открыть popup__photo)*/
   const zoomPhoto = cardContent.querySelector('.element__photo');
-  zoomPhoto.addEventListener('click', function (evt) {
+  zoomPhoto.addEventListener('click', () => {
     popupPhoto.classList.add('popup_opened');
     popupPhotoZoom.src = link;
     popupPhotoZoom.alt = name;
     popupTitleZoom.textContent = name;
   });
   elements.prepend(cardContent);
-};
+}
 
+initialCards.forEach((element) => {
+  addCard(element.link, element.name);
+});
 
 //закрыть попап popup__photo
-const buttonClosePopupPhoto = document.querySelector('.popup__escape_place_photo');
-const popupPhoto = document.querySelector('.popup__photo');
-const popupPhotoZoom = popupPhoto.querySelector('.popup__photo-zoom');
-const popupTitleZoom = popupPhoto.querySelector('.popup__caption');
 buttonClosePopupPhoto.addEventListener('click', () => togglePopup(popupPhoto));
 
 //закрыть-открыть форму добавления фото popup__add
@@ -119,9 +116,12 @@ function addFormSubmitHandler(evt) {
   evt.preventDefault();
   togglePopup(popupAdd);
   addCard(link, name);
+  //Здравствуйте, я не очень понимаю, как вызвать метод reset. Я вижу, что в 
+  //тренажере есть урок, посвященный этой теме. Я его изучу и обязательно применю.
+  //Спасибо за комментарии и правки.
   photoInput.value = '';
   titleInput.value = '';
-};
+}
 
 formElementAdd.addEventListener('submit', addFormSubmitHandler);
 addButton.addEventListener('click', () => togglePopup(popupAdd));
