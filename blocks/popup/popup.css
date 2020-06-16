@@ -11,7 +11,10 @@
 @import url(./__caption/popup__caption.css);
 @import url(./__escape/_place/popup__escape_place_form.css);
 @import url(./__escape/_place/popup__escape_place_photo.css);
-
+@import url(./__button-disabled/popup__button-disabled.css);
+@import url(./__input-error/popup__input-error.css);
+@import url(./__input-error/_active/popup__input-error_active.css);
+@import url(./__input/_border-error/popup__input_border-error.css);
 
 .popup{
   position: fixed;

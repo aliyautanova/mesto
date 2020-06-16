@@ -1,3 +1,4 @@
+
 const popupEdit = document.querySelector('.popup__edit');
 const editButton = document.querySelector('.profile__button-rename');
 const escapeButton = document.querySelector('.popup__escape');
@@ -16,6 +17,20 @@ const jobInput = document.querySelector('.popup__input_job');
 const formElement = document.querySelector('.popup__container');
 const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
+
+//передаем объект в аргумент
+const argument = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-disabled',
+  inputErrorClass: 'popup__input_border-error',
+  errorClass: '.popup__input-error_active'
+}
+
+// включение валидации вызовом enableValidation
+// все настройки c аргументом передаются при вызове
+enableValidation(argument);
 
 //добавить карточки 
 const initialCards = [
@@ -51,6 +66,8 @@ function togglePopup(element) {
     element.classList.add('popup_opened');
     nameInput.value = profileTitle.textContent;
     jobInput.value = profileSubtitle.textContent;
+    document.addEventListener('keydown', closeByEsc);
+    enableValidation(argument);
   }
   else {
     element.classList.remove('popup_opened');
@@ -96,6 +113,7 @@ function addCard(link, name) {
     popupPhotoZoom.src = link;
     popupPhotoZoom.alt = name;
     popupTitleZoom.textContent = name;
+    document.addEventListener('keydown', closeByEsc);
   });
   elements.prepend(cardContent);
 }
@@ -116,9 +134,7 @@ function addFormSubmitHandler(evt) {
   evt.preventDefault();
   togglePopup(popupAdd);
   addCard(link, name);
-  //Здравствуйте, я не очень понимаю, как вызвать метод reset. Я вижу, что в 
-  //тренажере есть урок, посвященный этой теме. Я его изучу и обязательно применю.
-  //Спасибо за комментарии и правки.
+
   photoInput.value = '';
   titleInput.value = '';
 }
@@ -126,3 +142,18 @@ function addFormSubmitHandler(evt) {
 formElementAdd.addEventListener('submit', addFormSubmitHandler);
 addButton.addEventListener('click', () => togglePopup(popupAdd));
 escapeButtonPlaceAdd.addEventListener('click', () => togglePopup(popupAdd));
+
+//закрыть форму через esc
+function closeByEsc(evt) {
+  if (evt.key === 'Escape') {
+    document.querySelector('.popup_opened').classList.remove('popup_opened');
+    document.removeEventListener('keydown', closeByEsc)
+  };
+};
+
+//закрыть форму через оверлэй
+document.addEventListener('click', function (evt) {
+  evt.target.classList.remove('popup_opened');
+  //остановим всплытие
+  evt.stopPropagation();
+});
