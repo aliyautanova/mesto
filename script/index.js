@@ -19,46 +19,14 @@ const profileTitle = document.querySelector('.profile__title');
 const profileSubtitle = document.querySelector('.profile__subtitle');
 
 //передаем объект в аргумент
-const argument = {
+const validSettings = {
   formSelector: '.popup__container',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button-save',
   inactiveButtonClass: 'popup__button-disabled',
   inputErrorClass: 'popup__input_border-error',
   errorClass: '.popup__input-error_active'
-}
-
-// включение валидации вызовом enableValidation
-// все настройки c аргументом передаются при вызове
-enableValidation(argument);
-
-//добавить карточки 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+};
 
 //открыть-закрыть окно редактирования popup__edit
 function togglePopup(element) {
@@ -67,7 +35,7 @@ function togglePopup(element) {
     nameInput.value = profileTitle.textContent;
     jobInput.value = profileSubtitle.textContent;
     document.addEventListener('keydown', closeByEsc);
-    enableValidation(argument);
+    enableValidation(validSettings);
   }
   else {
     element.classList.remove('popup_opened');
@@ -82,32 +50,30 @@ function formSubmitHandler(evt) {
   togglePopup(popupEdit);
 }
 
-editButton.addEventListener('click', () => togglePopup(popupEdit));//открыть окно ред-я
-escapeButton.addEventListener('click', () => togglePopup(popupEdit));//закрыть окно ред-я
-formElement.addEventListener('submit', formSubmitHandler);//внести изменения 
-
 //добавить карточку
 function addCard(link, name) {
   const elementCard = document.querySelector('#card').content;//загатовка карточки
   const cardContent = elementCard.cloneNode(true);
-  cardContent.querySelector('.element__photo').src = link;
-  cardContent.querySelector('.element__title').textContent = name;
-  cardContent.querySelector('.element__photo').alt = name;
+  const cardPhoto = cardContent.querySelector('.element__photo');
+  const cardTitle = cardContent.querySelector('.element__title');
+  const deleteButton = cardContent.querySelector('.element__delete');
+  const likeButton = cardContent.querySelector('.element__like');
+  const zoomPhoto = cardContent.querySelector('.element__photo');
+  cardPhoto.src = link;
+  cardTitle.textContent = name;
+  cardPhoto.alt = name;
 
   /* удалить карточку */
-  const deleteButton = cardContent.querySelector('.element__delete');
   deleteButton.addEventListener('click', (evt) => {
     evt.target.closest('.element').remove();
   });
 
   /* лайкнуть карточку */
-  const likeButton = cardContent.querySelector('.element__like');
   likeButton.addEventListener('click', (evt) => {
     evt.target.classList.toggle('element__like_active');
   });
 
   /* увеличить карточку (открыть popup__photo)*/
-  const zoomPhoto = cardContent.querySelector('.element__photo');
   zoomPhoto.addEventListener('click', () => {
     popupPhoto.classList.add('popup_opened');
     popupPhotoZoom.src = link;
@@ -122,9 +88,6 @@ initialCards.forEach((element) => {
   addCard(element.link, element.name);
 });
 
-//закрыть попап popup__photo
-buttonClosePopupPhoto.addEventListener('click', () => togglePopup(popupPhoto));
-
 //закрыть-открыть форму добавления фото popup__add
 function addFormSubmitHandler(evt) {
   const photoInput = document.querySelector('.popup__input_photo');
@@ -137,11 +100,7 @@ function addFormSubmitHandler(evt) {
 
   photoInput.value = '';
   titleInput.value = '';
-}
-
-formElementAdd.addEventListener('submit', addFormSubmitHandler);
-addButton.addEventListener('click', () => togglePopup(popupAdd));
-escapeButtonPlaceAdd.addEventListener('click', () => togglePopup(popupAdd));
+};
 
 //закрыть форму через esc
 function closeByEsc(evt) {
@@ -157,3 +116,15 @@ document.addEventListener('click', function (evt) {
   //остановим всплытие
   evt.stopPropagation();
 });
+
+formElementAdd.addEventListener('submit', addFormSubmitHandler); //отправить данные popup__add
+addButton.addEventListener('click', () => togglePopup(popupAdd));//открыть попап popup__photo
+escapeButtonPlaceAdd.addEventListener('click', () => togglePopup(popupAdd));//закрыть попап popup__add
+buttonClosePopupPhoto.addEventListener('click', () => togglePopup(popupPhoto));//закрыть попап popup__photo
+editButton.addEventListener('click', () => togglePopup(popupEdit));//открыть окно ред-я
+escapeButton.addEventListener('click', () => togglePopup(popupEdit));//закрыть окно ред-я
+formElement.addEventListener('submit', formSubmitHandler);//внести изменения 
+
+// включение валидации вызовом enableValidation
+// все настройки c аргументом передаются при вызове
+enableValidation(validSettings);

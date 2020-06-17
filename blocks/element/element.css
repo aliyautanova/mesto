@@ -10,4 +10,5 @@
   border-radius: 20px 20px 10px 10px;
   position: relative;
   max-height: 361px;
+  min-height: 40vh;
 }
